@@ -25,7 +25,7 @@ inputer.fit(x[:, 1:3])
 x[:, 1:3] = inputer.transform(x[:, 1:3]) # replace the missing data by the mean of the column
 
 
-# encode categorical data
+# encode categorical data -----------------------------------------------------
 from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 
 x[:, 0] = LabelEncoder().fit_transform(x[:, 0]) # encode the first colum (Countries)
@@ -36,7 +36,7 @@ x = OneHotEncoder(categorical_features = [0]).fit_transform(x).toarray()
 
 # be sure to use a new labelenconder for each transform, since they are fitted
 y = LabelEncoder().fit_transform(y) # encode the first colum (Countries)
-
+# -----------------------------------------------------------------------------
 
 # splt the dataset into training and testing
 from sklearn.model_selection import train_test_split
