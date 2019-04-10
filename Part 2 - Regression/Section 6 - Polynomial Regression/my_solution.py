@@ -57,13 +57,38 @@ lin_reg.fit(X, y)
 
 # fitting polynomial regression to the dataset
 from sklearn.preprocessing import PolynomialFeatures
-poly_reg   = PolynomialFeatures(degree=2)
+poly_reg   = PolynomialFeatures(degree=8)
 X_poly = poly_reg.fit_transform(X)
-
 lin_reg_2 = LinearRegression()
-lin_reg.fit(X_poly, y)
+lin_reg_2.fit(X_poly, y)
+
+
+# visualize
+plt.scatter(X, y, color='red')
+plt.plot(X, lin_reg.predict(X), color='blue')
+plt.title('Truth or Bluff')
+
+# that didn't work,
+# let's visualize with the poly reg
+plt.scatter(X, y, color='red')
+plt.plot(X, lin_reg_2.predict(poly_reg.fit_transform(X)), color='blue')
+plt.title('Truth or Bluff')
+plt.show() # much better!
 
 
 
+# (optional) if you want to have a high
+# resolution grid, do this:
+X_grid = np.arange(min(X), max(X), 0.1)
+X_grid = X_grid.reshape(len(X_grid), 1)
+plt.scatter(X, y, color='red')
+plt.plot(X_grid, lin_reg_2.predict(poly_reg.fit_transform(X_grid)), color='blue')
+plt.title('Truth or Bluff')
+plt.show() # much better!
 
 
+# Predicting a single result with Linear Regression
+lin_reg.predict([[6.5]])
+
+# Predicting a single result with Polynomial Regression
+lin_reg_2.predict(poly_reg.fit_transform([[6.5]]))
